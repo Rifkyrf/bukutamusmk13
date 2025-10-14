@@ -30,8 +30,5 @@ return [
     'max_age' => 0,
 
     'supports_credentials' => false,
-    'paths' => ['api/*', 'tamu-umum/*'],
-'allowed_methods' => ['*'],
-'allowed_origins' => ['*'], // kalau mau aman, ganti sesuai domain FE kamu
 
 ];
