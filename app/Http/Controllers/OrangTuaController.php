@@ -8,6 +8,8 @@ use App\Exports\OrangTuaExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Kelas;
+use App\Models\Guru;
 
 class OrangTuaController extends Controller
 {
@@ -58,8 +60,9 @@ class OrangTuaController extends Controller
 
     public function create()
     {
-        $gurus = \App\Models\Guru::orderBy('guru_nama', 'asc')->pluck('guru_nama');
-        return view('ortu.create', compact('gurus'));
+        $kelasList = Kelas::all();
+        $gurus = Guru::orderBy('guru_nama', 'asc')->pluck('guru_nama');
+        return view('ortu.create', compact('gurus', 'kelasList'));
     }
 
     public function store(Request $request)

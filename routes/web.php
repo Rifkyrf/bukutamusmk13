@@ -9,20 +9,22 @@ use App\Http\Controllers\{
     KunjunganController,
     ProfileController,
     LoginController,
-    UserController,
-    GuestController
+    AdminController,
+    GuestController,
+    KelasController,
+    GuruController
 };
 
 /*
 |--------------------------------------------------------------------------
-| 🌐 Halaman Publik (Tanpa Login)
+| 🌐 Routes Publik (Tanpa Login)
 |--------------------------------------------------------------------------
-| Ini bisa diakses siapa saja, termasuk tamu.
 */
 
-// Landing Page
+// Landing Page Utama
 Route::get('/', [GuestController::class, 'landing'])->name('landing');
 
+// Form Tamu (Instansi, Umum, Orang Tua)
 Route::prefix('tamu')->group(function () {
     Route::get('/instansi', [GuestController::class, 'instansi'])->name('guest.instansi');
     Route::post('/instansi', [GuestController::class, 'storeInstansi'])->name('guest.instansi.store');
@@ -35,24 +37,13 @@ Route::prefix('tamu')->group(function () {
 });
 
 
-/*
-|--------------------------------------------------------------------------
-| 👥 Form Registrasi User (Publik)
-|--------------------------------------------------------------------------
-*/
-Route::get('/user/form', [UserController::class, 'create'])->name('user.form');
-Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 
-/*
-|--------------------------------------------------------------------------
-| 📤 Export Data Tamu (Bisa publik)
-|--------------------------------------------------------------------------
-*/
+// Ekspor Data Tamu (Publik)
 Route::get('/tamu/export', [TamuUmumController::class, 'export'])->name('tamu.export');
 
 /*
 |--------------------------------------------------------------------------
-| 🔐 Login & Register (Hanya untuk yang belum login)
+| 🔐 Autentikasi: Login & Register (Hanya untuk Tamu / Belum Login)
 |--------------------------------------------------------------------------
 */
 Route::middleware('guest')->group(function () {
@@ -63,15 +54,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [LoginController::class, 'register']);
 });
 
-// Dashboard utama
-Route::prefix('dashboard')->name('dashboard.')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::get('/latest-meta', [DashboardController::class, 'latestMeta'])->name('latest_meta');
-    Route::get('/stream', [DashboardController::class, 'stream'])->name('stream');
-});
 /*
 |--------------------------------------------------------------------------
-| 🚪 Logout (Hanya untuk yang login)
+| 🚪 Logout (Hanya untuk Pengguna yang Sudah Login)
 |--------------------------------------------------------------------------
 */
 Route::post('/logout', [LoginController::class, 'logout'])
@@ -80,19 +65,31 @@ Route::post('/logout', [LoginController::class, 'logout'])
 
 /*
 |--------------------------------------------------------------------------
-| 🧭 Protected Routes (Hanya untuk admin yang login)
+| 🛡️ Routes Terproteksi (Hanya untuk Pengguna yang Sudah Login)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
 
-    // Dashboard utama
+    // Dashboard Admin
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::get('/latest-meta', [DashboardController::class, 'latestMeta'])->name('latest_meta');
         Route::get('/stream', [DashboardController::class, 'stream'])->name('stream');
     });
 
-    // Modul Tamu Umum
+    // Di dalam Route::middleware(['auth'])->group(function () { ... });
+
+Route::resource('admin', AdminController::class)->except(['show']);
+
+    // 🔹 Manajemen Kelas
+    Route::resource('kelas', KelasController::class)->except(['show']);
+
+    // 🔹 Manajemen Guru
+    Route::resource('guru', GuruController::class)->except(['show']);
+
+    // 🔹 Manajemen User (Admin Only)
+
+    // 🔹 Modul Tamu Umum
     Route::prefix('tamu-umum')->name('tamu_umum.')->group(function () {
         Route::get('/', [TamuUmumController::class, 'index'])->name('index');
         Route::get('/create', [TamuUmumController::class, 'create'])->name('create');
@@ -103,7 +100,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/export/excel', [TamuUmumController::class, 'export'])->name('export.excel');
     });
 
-    // Modul Orang Tua
+    // 🔹 Modul Orang Tua
     Route::prefix('ortu')->name('ortu.')->group(function () {
         Route::get('/', [OrangTuaController::class, 'index'])->name('index');
         Route::get('/create', [OrangTuaController::class, 'create'])->name('create');
@@ -114,7 +111,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/export/excel', [OrangTuaController::class, 'export'])->name('export.excel');
     });
 
-    // Modul Instansi
+    // 🔹 Modul Instansi
     Route::prefix('instansi')->name('instansi.')->group(function () {
         Route::get('/', [InstansiController::class, 'index'])->name('index');
         Route::get('/create', [InstansiController::class, 'create'])->name('create');
@@ -125,10 +122,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/export/excel', [InstansiController::class, 'export'])->name('export.excel');
     });
 
-    // Modul Kunjungan
+    // 🔹 Modul Kunjungan
     Route::get('/kunjungan', [KunjunganController::class, 'index'])->name('kunjungan');
 
-    // Modul Profile (opsional)
+    // 🔹 Modul Profil (Opsional – Bisa Diaktifkan Jika Diperlukan)
     // Route::prefix('profile')->name('profile.')->group(function () {
     //     Route::get('/', [ProfileController::class, 'index'])->name('index');
     //     Route::post('/update', [ProfileController::class, 'update'])->name('update');

@@ -43,21 +43,33 @@
                         <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
-                    <a href="{{ route('tamu_umum.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('tamu*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50' }}">
+                    <a href="{{ route('tamu_umum.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('tamu*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50 text-gray-700' }}">
                         <i class="fas fa-user"></i>
                         <span>Umum</span>
                     </a>
-                    <a href="{{ route('ortu.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('ortu*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50' }}">
+                    <a href="{{ route('ortu.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('ortu*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50 text-gray-700' }}">
                         <i class="fas fa-users"></i>
                         <span>Orang Tua Siswa</span>
                     </a>
-                    <a href="{{ route('instansi.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('instansi*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50' }}">
+                    <a href="{{ route('instansi.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('instansi*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50 text-gray-700' }}">
                         <i class="fas fa-building"></i>
                         <span>Instansi</span>
                     </a>
-                    <a href="{{ route('kunjungan') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('kunjungan') ? 'bg-gradient-to-r from-purple-600 to-purple-700 shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50' }}">
+                    <a href="{{ route('kunjungan') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('kunjungan') ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50 text-gray-700' }}">
                         <i class="fas fa-calendar"></i>
                         <span>Kunjungan</span>
+                    </a>
+                    <a href="{{ route('kelas.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('kelas*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50 text-gray-700' }}">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Kelola Kelas</span>
+                    </a>
+                    <a href="{{ route('guru.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('guru*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50 text-gray-700' }}">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Kelola Guru</span>
+                    </a>
+                    <a href="{{ route('admin.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('admin*') ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50 text-gray-700' }}">
+                        <i class="fas fa-users-cog"></i>
+                        <span>Kelola User</span>
                     </a>
                     {{-- <a href="{{ route('profile') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('profile') ? 'bg-gradient-to-r from-purple-600 to-purple-700 shadow-lg' : 'hover:bg-gradient-to-r hover:from-purple-600/50 hover:to-purple-700/50' }}">
                         <i class="fas fa-user-circle"></i>

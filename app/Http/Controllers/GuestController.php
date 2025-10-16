@@ -9,6 +9,7 @@ use App\Models\Instansi;
 use App\Models\TamuUmum;
 use App\Models\OrangTua;
 use App\Models\Guru;
+use App\Models\Kelas;
 
 class GuestController extends Controller
 {
@@ -31,8 +32,9 @@ class GuestController extends Controller
 
     public function ortu()
     {
+        $kelasList = Kelas::all();
         $gurus = Guru::orderBy('guru_nama', 'asc')->pluck('guru_nama');
-        return view('guest.ortu', compact('gurus'));
+        return view('guest.ortu', compact('gurus', 'kelasList'));
     }
 
     // ====== STORE INSTANSI ======

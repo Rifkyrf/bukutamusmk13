@@ -34,62 +34,29 @@
                                 required>
                         </div>
 
-                        <!-- kelas -->
-                        <!-- kelas -->
+                        <!-- Kelas -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                 Kelas <span class="text-red-500">*</span>
                             </label>
-                            <select name="kelas" class="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-900
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <select name="kelas_id" class="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-900
+               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
                                 <option value="">-- Pilih Kelas --</option>
 
-                                <!-- kelas 10 -->
-                                <option value="X RPL 1">X RPL 1 </option>
-                                <option value="X RPL 2">X RPL 2</option>
-                                <option value="X TKJ 1">X TKJ 1</option>
-                                <option value="X TKJ 2">X TKJ 2</option>
-                                <option value="X TKJ 3">X TKJ 3 </option>
-                                <option value="X KA 1">X KA 1</option>
-                                <option value="X KA 2">X KA 2</option>
-                                <option value="X KA 3">X KA 3</option>
-                                <option value="X KA 4">X KA 4</option>
-                                <option value="X KA 5">X KA 5</option>
-                                <option value="X KA 6">X KA 6</option>
+                                @php
+                                    $kelasGroups = $kelasList->groupBy(function ($k) {
+                                        return explode(' ', $k->nama)[0]; // ambil "X", "XI", "XII", dll
+                                    });
+                                @endphp
 
-                                <!-- kelas 11 -->
-                                <option value="XI RPL 1">XI RPL 1</option>
-                                <option value="XI RPL 2">XI RPL 2</option>
-                                <option value="XI TKJ 1">XI TKJ 2</option>
-                                <option value="XI TKJ 2">XI TKJ 2</option>
-                                <option value="XI TKJ 2">XI TKJ 3</option>
-                                <option value="XI KA 1">XI KA 1</option>
-                                <option value="XI KA 2">XI KA 2</option>
-                                <option value="XI KA 3">XI KA 3</option>
-                                <option value="XI KA 4">XI KA 4</option>
-                                <option value="XI KA 5">XI KA 5</option>
-                                <option value="XI KA 6">XI KA 6</option>
+                                @foreach($kelasGroups as $tingkat => $items)
+                                    <optgroup label="{{ $tingkat }}">
+                                        @foreach($items as $kelas)
+                                            <option value="{{ $kelas->id }}">{{ $kelas->nama }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
 
-                                <!-- kelas 12 -->
-                                <option value="XII RPL 1">XII RPL 1</option>
-                                <option value="XII RPL 2">XII RPL 2</option>
-                                <option value="XII TKJ 1">XII TKJ 1</option>
-                                <option value="XII TKJ 2">XII TKJ 2</option>
-                                <option value="XII TKJ 3">XII TKJ 3</option>
-                                <option value="XII KA 1">XII KA 1</option>
-                                <option value="XII KA 2">XII KA 2</option>
-                                <option value="XII KA 3">XII KA 3</option>
-                                <option value="XII KA 4">XII KA 4</option>
-                                <option value="XII KA 5">XII KA 5</option>
-                                <option value="XII KA 6">XII KA 6</option>
-
-                                <!-- kelas 13 -->
-                                <option value="XIII KA 1">XIII KA 1</option>
-                                <option value="XIII KA 2">XIII KA 2</option>
-                                <option value="XIII KA 3">XIII KA 3</option>
-                                <option value="XIII KA 4">XIII KA 4</option>
-                                <option value="XIII KA 5">XIII KA 5</option>
-                                <option value="XIII KA 6">XIII KA 6</option>
                             </select>
                         </div>
                         <!-- alamat -->
